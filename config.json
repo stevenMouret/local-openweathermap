@@ -1,0 +1,21 @@
+{
+    "js": {
+      "src": "sources/js/**/*.js",
+      "dist": "dist/js/"
+    },
+    "html": {
+        "src": "sources/html/**/*.html",
+        "dist": "dist/"
+    },
+    "images": {
+        "src": "sources/images/**/*",
+        "dist": "dist/images/"
+    },
+    "json": {
+        "src": "sources/json/**/*",
+        "dist": "dist/json/"
+    },
+    "browserSync": {
+      "directory": "./dist/"
+    }
+  }

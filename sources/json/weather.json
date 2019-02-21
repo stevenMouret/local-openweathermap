@@ -1,0 +1,42 @@
+{
+    "coord": {
+        "lon": -0.75,
+        "lat": 45.67
+    },
+    "weather": [
+        {
+            "id": 800,
+            "main": "Clear",
+            "description": "ciel dégagé",
+            "icon": "01d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 14.83,
+        "pressure": 1017,
+        "humidity": 45,
+        "temp_min": 13,
+        "temp_max": 17
+    },
+    "visibility": 10000,
+    "wind": {
+        "speed": 7.2,
+        "deg": 190
+    },
+    "clouds": {
+        "all": 0
+    },
+    "dt": 1550498400,
+    "sys": {
+        "type": 1,
+        "id": 6452,
+        "message": 0.0038,
+        "country": "FR",
+        "sunrise": 1550473200,
+        "sunset": 1550511266
+    },
+    "id": 2980339,
+    "name": "Arrondissement de Saintes",
+    "cod": 200
+}
