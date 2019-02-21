@@ -2,7 +2,7 @@
 
 **Javascript plugin to display weather on your website with OpenWeaterMap API.**
 
-Script git specific JSON or directly the JSON API of OpenWeatherMap.
+You can specified JSON file or directly the JSON API of OpenWeatherMap.
 
 [Demo](https://stevenmouret.github.io/local-weather/dist/)
 
@@ -18,7 +18,6 @@ const weater = new Weather('.weather', {
     cityId: '3009566',
     units: 'metric',
     appid: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-    jsonPath: '../json/weather.json',
     icoPath: 'images/',
     icoFormat: 'svg',
     icoWidth: '60',
