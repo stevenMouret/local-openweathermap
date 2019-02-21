@@ -13,7 +13,7 @@ var Weather = function () {
             _ref$jsonPath = _ref.jsonPath,
             jsonPath = _ref$jsonPath === undefined ? false : _ref$jsonPath,
             _ref$lang = _ref.lang,
-            lang = _ref$lang === undefined ? 'fr' : _ref$lang,
+            lang = _ref$lang === undefined ? 'en' : _ref$lang,
             cityId = _ref.cityId,
             _ref$units = _ref.units,
             units = _ref$units === undefined ? 'metric' : _ref$units,
@@ -22,19 +22,37 @@ var Weather = function () {
             _ref$icoFormat = _ref.icoFormat,
             icoFormat = _ref$icoFormat === undefined ? 'png' : _ref$icoFormat,
             _ref$icoWidth = _ref.icoWidth,
-            icoWidth = _ref$icoWidth === undefined ? '50' : _ref$icoWidth,
+            icoWidth = _ref$icoWidth === undefined ? 50 : _ref$icoWidth,
             _ref$icoHeight = _ref.icoHeight,
-            icoHeight = _ref$icoHeight === undefined ? '50' : _ref$icoHeight,
-            _ref$langTitle = _ref.langTitle,
-            langTitle = _ref$langTitle === undefined ? 'Météo' : _ref$langTitle,
-            _ref$langTempMax = _ref.langTempMax,
-            langTempMax = _ref$langTempMax === undefined ? 'Température maximum' : _ref$langTempMax,
-            _ref$langTempMin = _ref.langTempMin,
-            langTempMin = _ref$langTempMin === undefined ? 'Température minimum' : _ref$langTempMin,
-            _ref$langWind = _ref.langWind,
-            langWind = _ref$langWind === undefined ? 'Vent' : _ref$langWind,
+            icoHeight = _ref$icoHeight === undefined ? 50 : _ref$icoHeight,
             _ref$forecastDays = _ref.forecastDays,
-            forecastDays = _ref$forecastDays === undefined ? 3 : _ref$forecastDays;
+            forecastDays = _ref$forecastDays === undefined ? 3 : _ref$forecastDays,
+            _ref$langTempMax = _ref.langTempMax,
+            langTempMax = _ref$langTempMax === undefined ? 'Maximum temperature' : _ref$langTempMax,
+            _ref$langTempMin = _ref.langTempMin,
+            langTempMin = _ref$langTempMin === undefined ? 'Minimum temperature' : _ref$langTempMin,
+            _ref$langTo = _ref.langTo,
+            langTo = _ref$langTo === undefined ? 'to' : _ref$langTo,
+            _ref$langToday = _ref.langToday,
+            langToday = _ref$langToday === undefined ? 'Today' : _ref$langToday,
+            _ref$langWeather = _ref.langWeather,
+            langWeather = _ref$langWeather === undefined ? 'Weather' : _ref$langWeather,
+            _ref$langWind = _ref.langWind,
+            langWind = _ref$langWind === undefined ? 'Wind' : _ref$langWind,
+            _ref$langMonday = _ref.langMonday,
+            langMonday = _ref$langMonday === undefined ? 'Monday' : _ref$langMonday,
+            _ref$langTuesday = _ref.langTuesday,
+            langTuesday = _ref$langTuesday === undefined ? 'Tuesday' : _ref$langTuesday,
+            _ref$langWednesday = _ref.langWednesday,
+            langWednesday = _ref$langWednesday === undefined ? 'Wednesday' : _ref$langWednesday,
+            _ref$langThursday = _ref.langThursday,
+            langThursday = _ref$langThursday === undefined ? 'Thursday' : _ref$langThursday,
+            _ref$langFriday = _ref.langFriday,
+            langFriday = _ref$langFriday === undefined ? 'Friday' : _ref$langFriday,
+            _ref$langSaturday = _ref.langSaturday,
+            langSaturday = _ref$langSaturday === undefined ? 'Saturday' : _ref$langSaturday,
+            _ref$langSunday = _ref.langSunday,
+            langSunday = _ref$langSunday === undefined ? 'Sunday' : _ref$langSunday;
 
         _classCallCheck(this, Weather);
 
@@ -49,11 +67,20 @@ var Weather = function () {
         this.icoFormat = icoFormat;
         this.icoWidth = icoWidth;
         this.icoHeight = icoHeight;
-        this.langTitle = langTitle;
+        this.forecastDays = forecastDays;
         this.langTempMax = langTempMax;
         this.langTempMin = langTempMin;
+        this.langTo = langTo;
+        this.langToday = langToday;
+        this.langWeather = langWeather;
         this.langWind = langWind;
-        this.forecastDays = forecastDays;
+        this.langMonday = langMonday;
+        this.langTuesday = langTuesday;
+        this.langWednesday = langWednesday;
+        this.langThursday = langThursday;
+        this.langFriday = langFriday;
+        this.langSaturday = langSaturday;
+        this.langSunday = langSunday;
 
         // Check if the selector exists, if not, return an empty constructor
         if (!document.querySelector(weatherSelector)) return;
@@ -67,6 +94,8 @@ var Weather = function () {
         } else if (this.appid) {
             this.baseApiUrl = 'https://api.openweathermap.org/data/2.5/' + this.weatherType + '?id=' + cityId + '&lang=' + this.lang + '&units=' + this.units + '&appid=' + this.appid;
         }
+
+        console.log(this.baseApiUrl);
 
         this.app = document.querySelector(this.weatherSelector);
 
@@ -111,7 +140,7 @@ var Weather = function () {
 
             var template = '\n            <article>\n                <p class="weather__icon"><img src="' + this.icoPath + ico + '.' + this.icoFormat + '" alt="' + alt + '" width="' + this.icoWidth + '" height="' + this.icoHeight + '"></p>\n                <p class="weather__temp-max"><span class="ghost">' + this.langTempMax + '</span> ' + tempMax + this.unitsAbbr + '</p>\n                <p class="weather__temp-min"><span class="ghost">' + this.langTempMin + '</span> ' + tempMin + this.unitsAbbr + '</p>\n                <p class="weather__wind"><span class="ghost">' + this.langWind + '</span> ' + this.convertMsToKmh(wind) + ' km/h</p>\n            </article>\n        ';
 
-            this.app.innerHTML = '\n            <div class="weather__wrapper">\n                <h2 class="ghost">' + this.langTitle + ' <span class="ghost">\xE0 ' + name + '</span></h2>\n                <div class="weather__listitems">\n                    ' + template + '\n                </div>\n            </div>\n        ';
+            this.app.innerHTML = '\n            <div class="weather__wrapper">\n                <h2 class="ghost">' + this.langWeather + ' <span class="ghost">' + this.langTo + ' ' + name + '</span></h2>\n                <div class="weather__listitems">\n                    ' + template + '\n                </div>\n            </div>\n        ';
         }
     }, {
         key: 'convertMsToKmh',
@@ -129,11 +158,11 @@ var Weather = function () {
             var ico = data.list[0].weather[0].icon;
             var alt = data.list[0].weather[0].description;
 
-            var dailyTpl = '\n            <article class="weather__item">\n                <h3 class="weather__title">Aujourd\'hui</h3>\n                <p class="weather__icon"><img src="' + this.icoPath + ico + '.' + this.icoFormat + '" alt="' + alt + '" width="' + this.icoWidth + '" height="' + this.icoHeight + '"></p>\n                <p class="weather__temp-max"><span class="ghost">' + this.langTempMax + '</span> ' + tempMax + this.unitsAbbr + '</p>\n                <p class="weather__temp-min"><span class="ghost">' + this.langTempMin + '</span> ' + tempMin + this.unitsAbbr + '</p>\n                <p class="weather__wind"><span class="ghost">' + this.langWind + '</span> ' + this.convertMsToKmh(wind) + ' km/h</p>\n            </article>\n        ';
+            var dailyTpl = '\n            <article class="weather__item">\n                <h3 class="weather__title">' + this.langToday + '</h3>\n                <p class="weather__icon"><img src="' + this.icoPath + ico + '.' + this.icoFormat + '" alt="' + alt + '" width="' + this.icoWidth + '" height="' + this.icoHeight + '"></p>\n                <p class="weather__temp-max"><span class="ghost">' + this.langTempMax + '</span> ' + tempMax + this.unitsAbbr + '</p>\n                <p class="weather__temp-min"><span class="ghost">' + this.langTempMin + '</span> ' + tempMin + this.unitsAbbr + '</p>\n                <p class="weather__wind"><span class="ghost">' + this.langWind + '</span> ' + this.convertMsToKmh(wind) + ' km/h</p>\n            </article>\n        ';
 
             var forecast = [];
             var forecastTmp = [];
-            var days = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+            var days = [this.langSunday, this.langMonday, this.langTuesday, this.langWednesday, this.langThursday, this.langFriday, this.langSaturday];
             var today = new Date();
             var todayDayName = days[today.getDay()];
 
@@ -163,7 +192,7 @@ var Weather = function () {
 
             var forecastTpl = forecastTmp.join(' ');
 
-            this.app.innerHTML = '\n            <div class="weather__wrapper">\n                <h2 class="ghost">' + this.langTitle + ' <span class="ghost">\xE0 ' + name + '</span></h2>\n                <div class="weather__listitems">\n                    ' + dailyTpl + '\n                    ' + forecastTpl + '\n                </div>\n            </div>\n        ';
+            this.app.innerHTML = '\n            <div class="weather__wrapper">\n                <h2 class="ghost">' + this.langWeather + ' <span class="ghost">' + this.langTo + ' ' + name + '</span></h2>\n                <div class="weather__listitems">\n                    ' + dailyTpl + '\n                    ' + forecastTpl + '\n                </div>\n            </div>\n        ';
         }
     }]);
 
