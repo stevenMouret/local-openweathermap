@@ -54,8 +54,7 @@ class Weather {
 
         // Check if the selector exists, if not, return an empty constructor
         if (!document.querySelector(weatherSelector)) return;
-        if (!this.appid && !this.jsonPath) return;
-        if (!this.cityId) return;
+        if ((!this.appid && !this.cityId) && !this.jsonPath) return;
         // If fetch is not supported
         if(!self.fetch) return;
 
@@ -64,8 +63,6 @@ class Weather {
         } else if (this.appid) {
             this.baseApiUrl = `https://api.openweathermap.org/data/2.5/${this.weatherType}?id=${cityId}&lang=${this.lang}&units=${this.units}&appid=${this.appid}`;
         }
-
-        console.log(this.baseApiUrl);
 
         this.app = document.querySelector(this.weatherSelector);
 

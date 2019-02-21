@@ -2,9 +2,9 @@
 
 var weater = new Weather('.weather', {
     weatherType: 'weather',
-    appid: 'ca552343208237eb86235bba9288eb4a',
-    //jsonPath: 'json/weather.json',
-    cityId: 2988507, // Paris, FR
+    jsonPath: 'json/weather.json',
+    //appid: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+    //cityId: 2643743, // Paris, FR
     lang: 'fr',
     units: 'metric',
     icoPath: 'images/',
@@ -28,9 +28,7 @@ var weater = new Weather('.weather', {
 
 var weater2 = new Weather('.weather-2', {
     weatherType: 'forecast',
-    appid: 'ca552343208237eb86235bba9288eb4a',
     jsonPath: 'json/forecast.json',
-    cityId: 1850147, // Tokyo, JP
     lang: 'en',
     units: 'imperial',
     forecastDays: 3
