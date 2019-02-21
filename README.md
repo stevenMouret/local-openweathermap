@@ -28,45 +28,45 @@ const weater = new Weather('.weather', {
 
 # Options
 
-- weatherType: string
-  A string that define the type of weather, daily or forecast over a maximum of 5 days.
-  value: weather, forecast
+- weatherType: string<br>
+  A string that define the type of weather, daily or forecast over a maximum of 5 days.<br>
+  value: weather, forecast<br>
   default: forecast
 
-- appid: string
+- appid: string<br>
   The OpenWeatherMap key
   
-- jsonPath: string
+- jsonPath: string<br>
   The path to a local json file
   
-- lang: string
-  OpenWeatherMap language option
+- lang: string<br>
+  OpenWeatherMap language option<br>
   default: en
   
-- cityId: integer
+- cityId: integer<br>
   The id of the city. Must be found directly in the url after à search on https://openweathermap.org
 
-- units: string
-  OpenWeatherMap units format of temperature. Fahrenheit = imperial, Celsius = metric, Kelvin = standard
-  value: imperial, metric, standard
+- units: string<br>
+  OpenWeatherMap units format of temperature. Fahrenheit = imperial, Celsius = metric, Kelvin = standard<br>
+  value: imperial, metric, standard<br>
   default: metric
 
-- icoPath: string
-  Path to the image folder, by default use OpenWeatherMap images.
+- icoPath: string<br>
+  Path to the image folder, by default use OpenWeatherMap images.<br>
   default: https://openweathermap.org/img/w/
   
-- icoFormat: string
-  Format of the images
+- icoFormat: string<br>
+  Format of the images<br>
   default: png
   
-- icoWidth: integer
-  Width attribute of the images
+- icoWidth: integer<br>
+  Width attribute of the images<br>
   default: 50
   
-- icoHeight: integer
-  Height attribute of the image
+- icoHeight: integer<br>
+  Height attribute of the image<br>
   default: 50
   
-- forecastDays: integer
-  In the case where you choose weatherType to forecast, indicates the number of days to be displayed
+- forecastDays: integer<br>
+  In the case where you choose weatherType to forecast, indicates the number of days to be displayed<br>
   default: 3
