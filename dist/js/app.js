@@ -5,7 +5,7 @@ var weater = new Weather('.weather', {
     jsonPath: 'json/weather.json',
     //appid: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
     //cityId: 2643743, // Paris, FR
-    lang: 'fr',
+    lang: 'en',
     units: 'metric',
     icoPath: 'images/',
     icoFormat: 'svg',
