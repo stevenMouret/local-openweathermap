@@ -1,9 +1,9 @@
 const weater = new Weather('.weather', {
     weatherType: 'weather',
     jsonPath: 'json/weather.json',
-    //appid: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-    //cityId: 2643743, // Paris, FR
-    lang: 'en',
+    //appid: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+    //cityId: 2988507, // Paris, FR
+    lang: 'fr',
     units: 'metric',
     icoPath: 'images/',
     icoFormat: 'svg',

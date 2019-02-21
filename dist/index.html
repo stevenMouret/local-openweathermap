@@ -1,17 +1,27 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Météo</title>
+        <title>Javascript plugin to display weather on your website with OpenWeaterMap API</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+        <style>
+            html {
+                font-family: 'Roboto', sans-serif;
+            }
+            .weather__listitems {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+        </style>
     </head>
     <body>
         <div class="weather"></div>
         <div class="weather-2"></div>
-        <script src="js/weather-widget.js"></script>
-        <script src="js/app.js"></script>
+        <script src="js/weather-widget.min.js"></script>
+        <script src="js/app.min.js"></script>
     </body>
 </html>
 
