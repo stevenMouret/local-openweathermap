@@ -1,5 +1,7 @@
 const gulp = require('gulp');
 const babel = require('gulp-babel');
+const uglify = require('gulp-uglify');
+const rename = require("gulp-rename");
 const browser = require('browser-sync').create();
 const reload = browser.reload;
 
@@ -10,6 +12,9 @@ gulp.task('js', () => {
         .pipe(babel({
             presets: ['env']
         }))
+        .pipe(gulp.dest(config.js.dist))
+        .pipe(rename({suffix: ".min"}))
+        .pipe(uglify())
         .pipe(gulp.dest(config.js.dist))
         .on('end', reload);
 

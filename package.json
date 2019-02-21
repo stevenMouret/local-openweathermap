@@ -1,18 +1,18 @@
 {
-  "name": "local-weater",
-  "version": "0.9.0",
-  "description": "Javascript plugin to display weather on your website with OpenWeaterMap API",
-  "main": "gulpfile.babel.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Steven Mouret",
-  "license": "ISC",
-  "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-preset-env": "^1.6.1",
-    "browser-sync": "^2.24.7",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^7.0.1"
-  }
+    "name": "local-weater",
+    "version": "0.9.0",
+    "description": "Javascript plugin to display weather on your website with OpenWeaterMap API",
+    "author": "Steven Mouret",
+    "homepage": "https://github.com/stevenMouret/local-weather",
+    "main": "weather-widget.js",
+    "license": "ISC",
+    "devDependencies": {
+        "babel-core": "^6.26.3",
+        "babel-preset-env": "^1.6.1",
+        "browser-sync": "^2.24.7",
+        "gulp": "^3.9.1",
+        "gulp-babel": "^7.0.1",
+        "gulp-rename": "^1.4.0",
+        "gulp-uglify": "^3.0.1"
+    }
 }
