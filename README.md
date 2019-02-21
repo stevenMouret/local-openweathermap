@@ -1,13 +1,13 @@
-# Local weather
+# Local OpenWeatherMap
 
 **Javascript plugin to display weather on your website with OpenWeaterMap API.**
 
 You can specified JSON file or directly the JSON API of OpenWeatherMap.
 
-[Demo](https://stevenmouret.github.io/local-weather/dist/)
+[Demo](https://stevenmouret.github.io/local-openweathermap/dist/)
 
 # Installation
-1. Install Local Weater using: ```npm install -D local-weather```
+1. Install Local Weater using: ```npm install local-openweathermap```
 2. Get an API-Key form [openweathermap](https://openweathermap.org/)
 
 # Configuration

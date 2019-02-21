@@ -1,5 +1,5 @@
 {
-    "name": "local-weater",
+    "name": "local-openweathermap",
     "version": "0.9.0",
     "description": "Javascript plugin to display weather on your website with OpenWeaterMap API",
     "author": "Steven Mouret",
