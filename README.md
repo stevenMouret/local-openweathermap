@@ -69,3 +69,4 @@ const weater = new Weather('.weather', {
 - forecastDays: integer<br>
   In the case where you choose weatherType to forecast, indicates the number of days to be displayed<br>
   default: 3
+  Max: 4
