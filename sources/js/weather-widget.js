@@ -57,7 +57,7 @@ class Weather {
         this.langSunday = langSunday;
 
         // Check if the selector exists, if not, return an empty constructor
-        if (!document.querySelector(weatherSelector)) return;
+        if (!document.querySelector(this.weatherSelector)) return;
         if ((!this.appid && !this.cityId) && !this.jsonPath) return;
         // If fetch is not supported
         if(!self.fetch) return;

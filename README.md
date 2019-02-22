@@ -20,8 +20,8 @@ const weater = new Weather('.weather', {
     appid: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxx',
     icoPath: 'images/',
     icoFormat: 'svg',
-    icoWidth: '60',
-    icoHeight: '60',
+    icoWidth: 60,
+    icoHeight: 60,
 });
 ```
 

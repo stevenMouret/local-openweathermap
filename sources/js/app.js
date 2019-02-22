@@ -1,4 +1,4 @@
-const weater = new Weather('.weather', {
+const weather = new Weather('.weather', {
     weatherType: 'weather',
     jsonPath: 'json/weather.json',
     //appid: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
@@ -7,8 +7,8 @@ const weater = new Weather('.weather', {
     units: 'metric',
     icoPath: 'images/',
     icoFormat: 'svg',
-    icoWidth: '60',
-    icoHeight: '60',
+    icoWidth: 60,
+    icoHeight: 60,
     langTempMax: `Température maximum`,
     langTempMin: `Température minimum`,
     langTo: `à`,
@@ -25,7 +25,7 @@ const weater = new Weather('.weather', {
 });
 
 
-const weater2 = new Weather('.weather-2', {
+const weather2 = new Weather('.weather-2', {
     weatherType: 'forecast',
     jsonPath: 'json/forecast.json',
     lang: 'en',
