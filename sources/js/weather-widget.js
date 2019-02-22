@@ -1,3 +1,7 @@
+// TODO:
+// - Add webpack
+// - Customize template
+
 class Weather {
     constructor(weatherSelector, {
         weatherType = 'forecast', // weather, forecast

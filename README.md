@@ -32,6 +32,11 @@ const weater = new Weather('.weather', {
   value: weather, forecast<br>
   default: forecast
 
+- forecastDays: integer<br>
+  In the case where you choose weatherType to forecast, indicates the number of days to be displayed<br>
+  default: 3<br>
+  Max: 4
+
 - appid: string<br>
   The OpenWeatherMap key
   
@@ -65,8 +70,3 @@ const weater = new Weather('.weather', {
 - icoHeight: integer<br>
   Height attribute of the image<br>
   default: 50
-  
-- forecastDays: integer<br>
-  In the case where you choose weatherType to forecast, indicates the number of days to be displayed<br>
-  default: 3
-  Max: 4
