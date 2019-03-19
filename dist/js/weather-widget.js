@@ -4,6 +4,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+// TODO:
+// - Add webpack
+// - Customize template
+
 var Weather = function () {
     function Weather(weatherSelector, _ref) {
         var _ref$weatherType = _ref.weatherType,
@@ -57,17 +61,20 @@ var Weather = function () {
         _classCallCheck(this, Weather);
 
         this.weatherSelector = weatherSelector;
-        this.weatherType = weatherType;
-        this.appid = appid;
-        this.jsonPath = jsonPath;
-        this.lang = lang;
-        this.cityId = cityId;
-        this.units = units;
-        this.icoPath = icoPath;
-        this.icoFormat = icoFormat;
-        this.icoWidth = icoWidth;
-        this.icoHeight = icoHeight;
-        this.forecastDays = forecastDays;
+
+        this.app = document.querySelector(this.weatherSelector);
+
+        this.weatherType = typeof this.app.dataset.weatherType === 'undefined' ? weatherType : this.app.dataset.weatherType;
+        this.appid = typeof this.app.dataset.appid === 'undefined' ? appid : this.app.dataset.appid;
+        this.jsonPath = typeof this.app.dataset.jsonPath === 'undefined' ? jsonPath : this.app.dataset.jsonPath;
+        this.lang = typeof this.app.dataset.lang === 'undefined' ? lang : this.app.dataset.lang;
+        this.cityId = typeof this.app.dataset.cityId === 'undefined' ? lang : this.app.dataset.cityId;
+        this.units = typeof this.app.dataset.units === 'undefined' ? units : this.app.dataset.units;
+        this.icoPath = typeof this.app.dataset.icoPath === 'undefined' ? icoPath : this.app.dataset.icoPath;
+        this.icoFormat = typeof this.app.dataset.icoFormat === 'undefined' ? icoFormat : this.app.dataset.icoFormat;
+        this.icoWidth = typeof this.app.dataset.icoWidth === 'undefined' ? icoWidth : this.app.dataset.icoWidth;
+        this.icoHeight = typeof this.app.dataset.icoHeight === 'undefined' ? icoHeight : this.app.dataset.icoHeight;
+        this.forecastDays = typeof this.app.dataset.forecastDays === 'undefined' ? forecastDays : this.app.dataset.forecastDays;
         this.langTempMax = langTempMax;
         this.langTempMin = langTempMin;
         this.langTo = langTo;
@@ -83,18 +90,16 @@ var Weather = function () {
         this.langSunday = langSunday;
 
         // Check if the selector exists, if not, return an empty constructor
-        if (!document.querySelector(weatherSelector)) return;
-        if (!this.appid && !this.cityId && !this.jsonPath) return;
+        if (!document.querySelector(this.weatherSelector)) return;
+        if (!this.jsonPath) return;
         // If fetch is not supported
         if (!self.fetch) return;
 
         if (this.jsonPath) {
             this.baseApiUrl = this.jsonPath;
         } else if (this.appid) {
-            this.baseApiUrl = 'https://api.openweathermap.org/data/2.5/' + this.weatherType + '?id=' + cityId + '&lang=' + this.lang + '&units=' + this.units + '&appid=' + this.appid;
+            this.baseApiUrl = 'https://api.openweathermap.org/data/2.5/' + this.weatherType + '?id=' + this.cityId + '&lang=' + this.lang + '&units=' + this.units + '&appid=' + this.appid;
         }
-
-        this.app = document.querySelector(this.weatherSelector);
 
         this.unitsAbbr = this.units === 'metric' ? '°C' : '°F';
 
@@ -126,12 +131,18 @@ var Weather = function () {
             }
         }
     }, {
+        key: 'convertMsToKmh',
+        value: function convertMsToKmh(value) {
+            var kmh = parseFloat(value) * 3.6;
+            return Math.ceil(kmh);
+        }
+    }, {
         key: 'currentWeather',
         value: function currentWeather(data) {
             var name = data.name;
-            var tempMax = data.main.temp_max;
-            var tempMin = data.main.temp_min;
-            var wind = data.wind.speed; // meter/sec
+            var tempMax = Math.ceil(data.main.temp_max);
+            var tempMin = Math.ceil(data.main.temp_min);
+            var wind = this.convertMsToKmh(data.wind.speed); // meter/sec
             var ico = data.weather[0].icon;
             var alt = data.weather[0].description;
 
@@ -140,22 +151,16 @@ var Weather = function () {
             this.app.innerHTML = '\n            <div class="weather__wrapper">\n                <h2 class="ghost">' + this.langWeather + ' <span class="ghost">' + this.langTo + ' ' + name + '</span></h2>\n                <div class="weather__listitems">\n                    ' + template + '\n                </div>\n            </div>\n        ';
         }
     }, {
-        key: 'convertMsToKmh',
-        value: function convertMsToKmh(value) {
-            var kmh = parseFloat(value) * 3.6;
-            return Math.ceil(kmh);
-        }
-    }, {
         key: 'forecastWeather',
         value: function forecastWeather(data) {
             var name = data.city.name;
             var tempMax = Math.ceil(data.list[0].main.temp_max);
             var tempMin = Math.ceil(data.list[0].main.temp_min);
-            var wind = data.list[0].wind.speed; // meter/sec
+            var wind = this.convertMsToKmh(data.list[0].wind.speed); // meter/sec
             var ico = data.list[0].weather[0].icon;
             var alt = data.list[0].weather[0].description;
 
-            var dailyTpl = '\n            <article class="weather__item">\n                <h3 class="weather__title">' + this.langToday + '</h3>\n                <p class="weather__icon"><img src="' + this.icoPath + ico + '.' + this.icoFormat + '" alt="' + alt + '" width="' + this.icoWidth + '" height="' + this.icoHeight + '"></p>\n                <p class="weather__temp-max"><span class="ghost">' + this.langTempMax + '</span> ' + tempMax + this.unitsAbbr + '</p>\n                <p class="weather__temp-min"><span class="ghost">' + this.langTempMin + '</span> ' + tempMin + this.unitsAbbr + '</p>\n                <p class="weather__wind"><span class="ghost">' + this.langWind + '</span> ' + this.convertMsToKmh(wind) + ' km/h</p>\n            </article>\n        ';
+            var dailyTpl = '\n            <article class="weather__item">\n                <h3 class="weather__title">' + this.langToday + '</h3>\n                <p class="weather__icon"><img src="' + this.icoPath + ico + '.' + this.icoFormat + '" alt="' + alt + '" width="' + this.icoWidth + '" height="' + this.icoHeight + '"></p>\n                <p class="weather__temp-max"><span class="ghost">' + this.langTempMax + '</span> ' + tempMax + this.unitsAbbr + '</p>\n                <p class="weather__temp-min"><span class="ghost">' + this.langTempMin + '</span> ' + tempMin + this.unitsAbbr + '</p>\n                <p class="weather__wind"><span class="ghost">' + this.langWind + '</span> ' + wind + ' km/h</p>\n            </article>\n        ';
 
             var forecast = [];
             var forecastTmp = [];
@@ -172,11 +177,11 @@ var Weather = function () {
                 if (hour === 13 && dayName !== todayDayName) {
                     var _tempMax = Math.ceil(data.list[i].main.temp_max);
                     var _tempMin = Math.ceil(data.list[i].main.temp_min);
-                    var _wind = data.list[i].wind.speed;
+                    var _wind = this.convertMsToKmh(data.list[i].wind.speed);
                     var _ico = data.list[i].weather[0].icon;
                     var _alt = data.list[i].weather[0].description;
 
-                    var dayTpl = '\n                    <article class="weather__item">\n                        <h3 class="weather__title">' + dayName + '</h3>\n                        <p class="weather__icon"><img src="' + this.icoPath + _ico + '.' + this.icoFormat + '" alt="' + _alt + '" width="' + this.icoWidth + '" height="' + this.icoHeight + '"></p>\n                        <p class="weather__temp-max"><span class="ghost">' + this.langTempMax + '</span> ' + _tempMax + this.unitsAbbr + '</p>\n                        <p class="weather__temp-min"><span class="ghost">' + this.langTempMin + '</span> ' + _tempMin + this.unitsAbbr + '</p>\n                        <p class="weather__wind"><span class="ghost">' + this.langWind + '</span> ' + this.convertMsToKmh(_wind) + ' km/h</p>\n                    </article>\n                ';
+                    var dayTpl = '\n                    <article class="weather__item">\n                        <h3 class="weather__title">' + dayName + '</h3>\n                        <p class="weather__icon"><img src="' + this.icoPath + _ico + '.' + this.icoFormat + '" alt="' + _alt + '" width="' + this.icoWidth + '" height="' + this.icoHeight + '"></p>\n                        <p class="weather__temp-max"><span class="ghost">' + this.langTempMax + '</span> ' + _tempMax + this.unitsAbbr + '</p>\n                        <p class="weather__temp-min"><span class="ghost">' + this.langTempMin + '</span> ' + _tempMin + this.unitsAbbr + '</p>\n                        <p class="weather__wind"><span class="ghost">' + this.langWind + '</span> ' + _wind + ' km/h</p>\n                    </article>\n                ';
 
                     forecast.push(dayTpl);
                 }

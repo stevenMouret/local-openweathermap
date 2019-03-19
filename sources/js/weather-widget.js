@@ -31,17 +31,20 @@ class Weather {
 
     }) {
         this.weatherSelector = weatherSelector;
-        this.weatherType = weatherType;
-        this.appid = appid;
-        this.jsonPath = jsonPath;
-        this.lang = lang;
-        this.cityId = cityId;
-        this.units = units;
-        this.icoPath = icoPath;
-        this.icoFormat = icoFormat;
-        this.icoWidth = icoWidth;
-        this.icoHeight = icoHeight;
-        this.forecastDays = forecastDays;
+
+        this.app = document.querySelector(this.weatherSelector);
+
+        this.weatherType = typeof this.app.dataset.weatherType === 'undefined' ? weatherType : this.app.dataset.weatherType;
+        this.appid = typeof this.app.dataset.appid === 'undefined' ? appid : this.app.dataset.appid;
+        this.jsonPath = typeof this.app.dataset.jsonPath === 'undefined' ? jsonPath : this.app.dataset.jsonPath;
+        this.lang = typeof this.app.dataset.lang === 'undefined' ? lang : this.app.dataset.lang;
+        this.cityId = typeof this.app.dataset.cityId === 'undefined' ? lang : this.app.dataset.cityId;
+        this.units = typeof this.app.dataset.units === 'undefined' ? units : this.app.dataset.units;
+        this.icoPath = typeof this.app.dataset.icoPath === 'undefined' ? icoPath : this.app.dataset.icoPath;
+        this.icoFormat = typeof this.app.dataset.icoFormat === 'undefined' ? icoFormat : this.app.dataset.icoFormat;
+        this.icoWidth = typeof this.app.dataset.icoWidth === 'undefined' ? icoWidth : this.app.dataset.icoWidth;
+        this.icoHeight = typeof this.app.dataset.icoHeight === 'undefined' ? icoHeight : this.app.dataset.icoHeight;
+        this.forecastDays = typeof this.app.dataset.forecastDays === 'undefined' ? forecastDays : this.app.dataset.forecastDays;
         this.langTempMax = langTempMax;
         this.langTempMin = langTempMin;
         this.langTo = langTo;
@@ -58,17 +61,15 @@ class Weather {
 
         // Check if the selector exists, if not, return an empty constructor
         if (!document.querySelector(this.weatherSelector)) return;
-        if ((!this.appid && !this.cityId) && !this.jsonPath) return;
+        if (!this.jsonPath) return;
         // If fetch is not supported
         if(!self.fetch) return;
 
         if (this.jsonPath) {
             this.baseApiUrl = this.jsonPath;
         } else if (this.appid) {
-            this.baseApiUrl = `https://api.openweathermap.org/data/2.5/${this.weatherType}?id=${cityId}&lang=${this.lang}&units=${this.units}&appid=${this.appid}`;
+            this.baseApiUrl = `https://api.openweathermap.org/data/2.5/${this.weatherType}?id=${this.cityId}&lang=${this.lang}&units=${this.units}&appid=${this.appid}`;
         }
-
-        this.app = document.querySelector(this.weatherSelector);
 
         this.unitsAbbr = (this.units === 'metric') ? '°C' : '°F';
 
@@ -95,11 +96,16 @@ class Weather {
         }
     }
 
+    convertMsToKmh(value) {
+        const kmh = parseFloat(value) * 3.6;
+        return Math.ceil(kmh);
+    }
+
     currentWeather(data) {
         const name = data.name;
-        const tempMax = data.main.temp_max;
-        const tempMin = data.main.temp_min;
-        const wind = data.wind.speed; // meter/sec
+        const tempMax = Math.ceil(data.main.temp_max);
+        const tempMin = Math.ceil(data.main.temp_min);
+        const wind = this.convertMsToKmh(data.wind.speed); // meter/sec
         const ico = data.weather[0].icon;
         const alt = data.weather[0].description;
 
@@ -122,16 +128,11 @@ class Weather {
         `;
     }
 
-    convertMsToKmh(value) {
-        const kmh = parseFloat(value) * 3.6;
-        return Math.ceil(kmh);
-    }
-
     forecastWeather(data) {
         const name = data.city.name;
         const tempMax = Math.ceil(data.list[0].main.temp_max);
         const tempMin = Math.ceil(data.list[0].main.temp_min);
-        const wind = data.list[0].wind.speed; // meter/sec
+        const wind = this.convertMsToKmh(data.list[0].wind.speed); // meter/sec
         const ico = data.list[0].weather[0].icon;
         const alt = data.list[0].weather[0].description;
 
@@ -141,7 +142,7 @@ class Weather {
                 <p class="weather__icon"><img src="${this.icoPath}${ico}.${this.icoFormat}" alt="${alt}" width="${this.icoWidth}" height="${this.icoHeight}"></p>
                 <p class="weather__temp-max"><span class="ghost">${this.langTempMax}</span> ${tempMax}${this.unitsAbbr}</p>
                 <p class="weather__temp-min"><span class="ghost">${this.langTempMin}</span> ${tempMin}${this.unitsAbbr}</p>
-                <p class="weather__wind"><span class="ghost">${this.langWind}</span> ${this.convertMsToKmh(wind)} km/h</p>
+                <p class="weather__wind"><span class="ghost">${this.langWind}</span> ${wind} km/h</p>
             </article>
         `;
 
@@ -160,7 +161,7 @@ class Weather {
             if (hour === 13 && dayName !== todayDayName) {
                 const tempMax = Math.ceil(data.list[i].main.temp_max);
                 const tempMin = Math.ceil(data.list[i].main.temp_min);
-                let wind = data.list[i].wind.speed;
+                let wind = this.convertMsToKmh(data.list[i].wind.speed);
                 let ico = data.list[i].weather[0].icon;
                 let alt = data.list[i].weather[0].description;
 
@@ -170,7 +171,7 @@ class Weather {
                         <p class="weather__icon"><img src="${this.icoPath}${ico}.${this.icoFormat}" alt="${alt}" width="${this.icoWidth}" height="${this.icoHeight}"></p>
                         <p class="weather__temp-max"><span class="ghost">${this.langTempMax}</span> ${tempMax}${this.unitsAbbr}</p>
                         <p class="weather__temp-min"><span class="ghost">${this.langTempMin}</span> ${tempMin}${this.unitsAbbr}</p>
-                        <p class="weather__wind"><span class="ghost">${this.langWind}</span> ${this.convertMsToKmh(wind)} km/h</p>
+                        <p class="weather__wind"><span class="ghost">${this.langWind}</span> ${wind} km/h</p>
                     </article>
                 `;
 
@@ -180,7 +181,7 @@ class Weather {
 
         // Retrieves only the results you need.
         for (let i = 0; i < this.forecastDays; i++) {
-            forecastTmp.push(forecast[i])
+            forecastTmp.push(forecast[i]);
         }
 
         const forecastTpl = forecastTmp.join(' ');

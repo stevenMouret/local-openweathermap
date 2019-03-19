@@ -25,6 +25,12 @@ const weater = new Weather('.weather', {
 });
 ```
 
+Options can be also call with data attributes.
+
+```html
+<div class="weather" data-json-path="json/weather.json" data-ico-path="images/" data-units="metric" data-weather-type="weather" data-ico-format="svg" data-ico-width="30" data-ico-height="30"></div>
+```
+
 # Options
 
 - weatherType: string<br>
