@@ -7,5 +7,5 @@ const weather2 = new Weather('.weather-2', {
     jsonPath: 'json/forecast.json',
     lang: 'en',
     units: 'imperial',
-    forecastDays: 3,
+    forecastDays: 5,
 });

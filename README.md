@@ -41,7 +41,7 @@ Options can be also call with data attributes.
 - forecastDays: integer<br>
   In the case where you choose weatherType to forecast, indicates the number of days to be displayed<br>
   default: 3<br>
-  Max: 4
+  Max: 5
 
 - appid: string<br>
   The OpenWeatherMap key

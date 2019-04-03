@@ -180,7 +180,7 @@ class Weather {
         }
 
         // Retrieves only the results you need.
-        for (let i = 0; i < this.forecastDays; i++) {
+        for (let i = 1; i < this.forecastDays; i++) {
             forecastTmp.push(forecast[i]);
         }
 

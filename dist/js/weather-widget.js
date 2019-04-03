@@ -188,7 +188,7 @@ var Weather = function () {
             }
 
             // Retrieves only the results you need.
-            for (var _i = 0; _i < this.forecastDays; _i++) {
+            for (var _i = 1; _i < this.forecastDays; _i++) {
                 forecastTmp.push(forecast[_i]);
             }
 
