@@ -1,6 +1,7 @@
 // TODO:
 // - Add webpack
 // - Customize template
+// - svg color option
 
 class Weather {
     constructor(weatherSelector, {
@@ -150,15 +151,15 @@ class Weather {
         const forecastTmp = [];
         const days = [this.langSunday, this.langMonday, this.langTuesday, this.langWednesday, this.langThursday, this.langFriday, this.langSaturday];
         const today = new Date();
-        const todayDayName = days[today.getDay()];
+        const todayDayName = days[today.getUTCDay()];
 
         for (let i = 0; i < data.list.length; i++) {
             const timestamp = data.list[i].dt*1000;
             const date = new Date(timestamp);
-            const dayName = days[date.getDay()];
-            const hour = date.getHours();
+            const dayName = days[date.getUTCDay()];
+            const hour = date.getUTCHours();
 
-            if (hour === 13 && dayName !== todayDayName) {
+            if (hour === 12 && dayName !== todayDayName) {
                 const tempMax = Math.ceil(data.list[i].main.temp_max);
                 const tempMin = Math.ceil(data.list[i].main.temp_min);
                 let wind = this.convertMsToKmh(data.list[i].wind.speed);
