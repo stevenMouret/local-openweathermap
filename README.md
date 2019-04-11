@@ -26,6 +26,7 @@ const weater = new Weather('.weather', {
 ```
 
 Options can be also call with data attributes.
+Language option are not added with data attribute.
 
 ```html
 <div class="weather" data-json-path="json/weather.json" data-ico-path="images/" data-units="metric" data-weather-type="weather" data-ico-format="svg" data-ico-width="30" data-ico-height="30"></div>
@@ -44,10 +45,10 @@ Options can be also call with data attributes.
   Max: 5
 
 - appid: string<br>
-  The OpenWeatherMap key
+  The OpenWeatherMap key. In this case, no need jsonPath option.
   
 - jsonPath: string<br>
-  The path to a local json file
+  The path to a local json file. In this case, no need appid option.
   
 - lang: string<br>
   OpenWeatherMap language option<br>
@@ -76,3 +77,9 @@ Options can be also call with data attributes.
 - icoHeight: integer<br>
   Height attribute of the image<br>
   default: 50
+  
+  # Todo
+  
+  * Add template in configuration.
+  * Color management in the case of SVG files.
+  * Refactor language
